@@ -1,5 +1,4 @@
 
-````markdown
 # Food Delivery Microservices
 
 ## 1. Project Overview
@@ -24,66 +23,68 @@ To develop a microservice-based food delivery application with three independent
 
 ---
 
-## 3. System Architecture
+## 3. Project Objectives
 
-```text
-                         Client
-                           |
-                           v
-                    +---------------+
-                    | Order Service |
-                    |    Port 5002  |
-                    +-------+-------+
-                            |
-                 +----------+----------+
-                 |                     |
-                 v                     v
-       +-------------------+   +-------------------+
-       | Restaurant        |   | Delivery          |
-       | Service           |   | Service           |
-       | Port 5000         |   | Port 5001         |
-       +-------------------+   +-------------------+
-````
+- Develop three independent microservices for a food delivery application.
+- Implement REST APIs for Restaurant, Delivery, and Order management.
+- Containerize each microservice using Docker.
+- Deploy and manage all services using Docker Compose.
+- Establish communication between the microservices through a common Docker network.
+- Validate end-to-end communication between the Order, Restaurant, and Delivery Services.
+- Perform workload testing at different concurrency levels.
+- Monitor CPU and memory usage of the Docker containers.
+- Analyze response time and throughput under different workloads.
+- Identify performance trends and resource usage of the services.
+
+---
+
+## 4. System Architecture
+
+The Food Delivery application is designed using a microservice architecture consisting of three independent services: Order Service, Restaurant Service, and Delivery Service.
+
+![Food Delivery Microservices Architecture](Food%20Delivery%20Microservices%20Architecture.png)
+
+The Order Service handles order operations and communicates with the Restaurant Service for restaurant and menu validation and with the Delivery Service for delivery creation.
 
 The Order Service acts as the central service for order creation. During order processing, it communicates with the Restaurant Service to validate restaurant/menu information and with the Delivery Service to create a delivery.
 
 ---
 
-## 4. Technologies Used
+## 5. Technologies Used
 
-| Technology                | Purpose                          |
-| ------------------------- | -------------------------------- |
-| Python                    | Service implementation           |
-| Flask                     | REST API development             |
-| Requests                  | Inter-service communication      |
-| Docker                    | Containerization                 |
-| Docker Compose            | Multi-service deployment         |
-| Docker Network            | Communication between containers |
-| Python ThreadPoolExecutor | Workload testing                 |
-| Docker Stats              | Resource monitoring              |
-| Matplotlib                | Performance graphs               |
+| Technology | Purpose |
+|---|---|
+| Python | Service implementation |
+| Flask | REST API development |
+| Requests | Inter-service communication |
+| Docker | Containerization |
+| Docker Compose | Multi-service deployment |
+| Docker Network | Communication between containers |
+| Python ThreadPoolExecutor | Workload testing |
+| Docker Stats | Resource monitoring |
+| Matplotlib | Performance graphs |
 
 ---
 
-# 5. Microservices
+# 6. Microservices
 
-## 5.1 Restaurant Service
+## 6.1 Restaurant Service
 
 The Restaurant Service manages restaurant information, menus, and item availability.
 
 ### Responsibilities
 
-* Manage restaurant information
-* Provide restaurant details
-* Provide menu information
-* Check restaurant availability
-* Check menu item availability
+- Manage restaurant information
+- Provide restaurant details
+- Provide menu information
+- Check restaurant availability
+- Check menu item availability
 
 ### Port
 
 ```text
 5000
-```
+````
 
 ### APIs
 
@@ -99,7 +100,7 @@ The Restaurant Service manages restaurant information, menus, and item availabil
 
 ---
 
-## 5.2 Delivery Service
+## 6.2 Delivery Service
 
 The Delivery Service manages delivery records and delivery status.
 
@@ -130,7 +131,7 @@ The Delivery Service manages delivery records and delivery status.
 
 ---
 
-## 5.3 Order Service
+## 6.3 Order Service
 
 The Order Service manages food orders and coordinates with the other two services.
 
@@ -159,7 +160,7 @@ The Order Service manages food orders and coordinates with the other two service
 
 ---
 
-# 6. Running the Services
+# 7. Running the Services
 
 The services can be run independently during development and testing.
 
@@ -179,7 +180,7 @@ Order Service      → 5002
 
 ---
 
-# 7. Docker Containerization
+# 8. Docker Containerization
 
 Each microservice contains its own Dockerfile.
 
@@ -190,6 +191,8 @@ The services are deployed together using Docker Compose.
 ```bash
 docker compose build
 ```
+
+![Three Services Build](screenshots/3%20services%20build.jpg)
 
 ### Start the services
 
@@ -203,17 +206,21 @@ docker compose up -d
 docker compose ps
 ```
 
+![Docker Compose Up and PS](screenshots/docker-compose-up%20and%20ps.png)
+
 The application runs three containers:
 
 ```text
 restaurant-service
+
 delivery-service
+
 order-service
 ```
 
 ---
 
-# 8. Docker Network
+# 9. Docker Network
 
 The three services are connected through a common Docker network:
 
@@ -223,44 +230,24 @@ food-delivery-network
 
 This allows the containers to communicate with each other using their Docker service names.
 
-```text
-                 food-delivery-network
-                         |
-          +--------------+--------------+
-          |              |              |
-          v              v              v
-     Restaurant      Delivery        Order
-      Service        Service        Service
-       :5000          :5001          :5002
-```
+![Docker Network](screenshots/Docker%20Network.png)
+
+
 
 ---
 
-# 9. Inter-Service Communication
+# 10. Inter-Service Communication
 
 The Order Service communicates with the other services during order creation.
 
-```text
-Client
-   |
-   v
-Order Service
-   |
-   +----> Restaurant Service
-   |       |
-   |       +---- Validate restaurant
-   |       +---- Validate menu item
-   |
-   +----> Delivery Service
-           |
-           +---- Create delivery
-```
+
+![Inter-Service Communication](screenshots/Inter-Service%20Communication.png)
 
 The final order response contains information related to the order, restaurant, and delivery.
 
 ---
 
-# 10. Workload Testing
+# 11. Workload Testing
 
 Workload testing was performed using concurrent requests to the Order Service.
 
@@ -294,7 +281,7 @@ The following parameters were recorded:
 
 ---
 
-# 11. Resource Monitoring
+# 12. Resource Monitoring
 
 Docker resource usage was monitored using:
 
@@ -313,7 +300,7 @@ CPU utilization remained very low across the tested workload levels.
 
 ---
 
-# 12. Performance Analysis
+# 13. Performance Analysis
 
 Two graphs were generated from the workload results.
 
@@ -337,32 +324,57 @@ Two graphs were generated from the workload results.
 
 ---
 
-# 13. Project Structure
+# 14. Project Structure
 
 ```text
 food-delivery-microservices/
-│
+
 ├── restaurant-service/
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   └── README.md
+
 ├── delivery-service/
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── README.md
+│   └── tests/
+│       └── test_delivery.py
+
 ├── order-service/
-│
+│   ├── app.py
+│   ├── Dockerfile
+│   └── requirements.txt
+
 ├── results/
 │   ├── workload_test.py
 │   ├── workload-results.csv
 │   ├── create_graph.py
 │   ├── concurrency-vs-response-time.png
 │   └── concurrency-vs-throughput.png
-│
+
 ├── screenshots/
+│   ├── 3 services build.jpg
+│   ├── Docker Network.png
+│   ├── docker-compose-up and ps.png
+│   ├── Inter-Service Communication.png
 │   └── workload-testing/
-│
+│       ├── level-1/
+│       ├── level-2/
+│       ├── level-4/
+│       ├── level-8/
+│       └── level-16/
+
 ├── docker-compose.yml
+├── Food Delivery Microservices Architecture.png
 └── README.md
 ```
 
 ---
 
-# 14. Conclusion
+# 15. Conclusion
 
 The Food Delivery Microservices application was successfully developed using three independent services: Restaurant, Delivery, and Order.
 
@@ -371,5 +383,14 @@ The services were containerized using Docker and deployed using Docker Compose o
 Workload testing was performed at five concurrency levels. The system successfully handled all tested requests without failures. The performance analysis showed that concurrency 4 produced the highest measured throughput, while higher concurrency levels resulted in increased response time and reduced throughput.
 
 Overall, the project demonstrates microservice development, containerization, service communication, workload testing, resource monitoring, and performance analysis.
+
+---
+
+# 16. Contributors
+* **Abhinandan**
+* **Bhavana**
+* **Pradeep**
+* **Zakiya**
+
 
 ```
