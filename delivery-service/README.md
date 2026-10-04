@@ -116,7 +116,7 @@ The Delivery Service was tested using its REST API endpoints.
 
 The Delivery Service was started successfully on port `5001`.
 
-![Delivery Service Running](screenshots/Delivery%20Service%20Running.png)
+![Delivery Service Running](../screenshots/Delivery%20Service%20Running.png)
 
 ---
 
@@ -130,7 +130,7 @@ POST /deliveries
 
 The following screenshot shows the successful creation of a delivery record.
 
-![Create Delivery](screenshots/Create%20Delivery.png)
+![Create Delivery](../screenshots/Create%20Delivery.png)
 
 ---
 
@@ -138,7 +138,7 @@ The following screenshot shows the successful creation of a delivery record.
 
 The delivery information returned by the service can be viewed through the API response.
 
-![Delivery Data](screenshots/Delivery%20Data.png)
+![Delivery Data](../screenshots/Delivery%20Data.png)
 
 ---
 
@@ -152,7 +152,7 @@ GET /deliveries/<id>/status
 
 The following screenshot shows the delivery status response.
 
-![Delivery Status](screenshots/Delivery%20Status.png)
+![Delivery Status](../screenshots/Delivery%20Status.png)
 
 ---
 
@@ -194,7 +194,7 @@ docker build -t delivery-service .
 
 The Docker image was successfully built for the Delivery Service.
 
-![Build the Docker Image](screenshots/Build%20the%20Docker%20Image%20of%20delivery%20service.png)
+![Build the Docker Image](../screenshots/Build%20the%20Docker%20Image%20of%20delivery%20service.png)
 
 ---
 
@@ -303,7 +303,7 @@ This allows the services to communicate through the Docker network without depen
 A delivery record contains information required for tracking the delivery.
 
 Example:
-![Delivery Data](screenshots/Delivery%20Data.png)
+![Delivery Data](../screenshots/Delivery%20Data.png)
 
 T
 
