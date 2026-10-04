@@ -312,6 +312,19 @@ Two graphs were generated from the workload results.
 
 ![Concurrency vs Throughput](results/concurrency-vs-throughput.png)
 
+
+### Resource Monitoring
+
+Resource utilization was monitored for all three services using `docker stats --no-stream` at different workload levels. CPU utilization remained low, while memory usage stayed relatively stable across the tested concurrency levels.
+
+### Concurrency vs CPU Utilization
+
+![Concurrency vs CPU Utilization](results/concurrency-vs-cpu.png)
+
+### Concurrency vs Memory Utilization
+
+![Concurrency vs Memory Utilization](results/concurrency-vs-memory.png)
+
 ### Observations
 
 * All tested requests were successful.
